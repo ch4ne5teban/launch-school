@@ -1,23 +1,53 @@
-console.log("Welcome to Calculator!");
 const READLINE = require("readline-sync");
 
-console.log("Please enter the first number:");
-let num1 = parseInt(READLINE.prompt());
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
 
-console.log("Please enter the second number:");
-let num2 = parseInt(READLINE.prompt());
+function invalidNumber(num) {
+  return num.toString().trimStart() === '' || Number.isNaN(Number(num));
+}
 
-console.log("What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide");
+prompt("Welcome to Calculator!");
+
+prompt("Please enter the first number:");
+let num1 = parseInt(READLINE.prompt(), 10);
+
+while (invalidNumber(num1)) {
+  prompt("Invalid input. Enter a valid integer");
+  num1 = parseInt(READLINE.prompt(), 10);
+}
+
+prompt("Please enter the second number:");
+let num2 = parseInt(READLINE.prompt(), 10);
+
+while (invalidNumber(num2)) {
+  prompt("Invalid input. Enter a valid integer");
+  num2 = parseInt(READLINE.prompt(), 10);
+}
+
+prompt("What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide");
 let operation = READLINE.prompt();
 
-let output;
-if (operation === "1") {
-  output = num1 + num2;
-} else if (operation === "2") {
-    output = num1 - num2;
-} else if (operation === "3") {
-    output = num1 * num2;
-} else if (operation === "4") {
-    output = num1 / num2;
+while (!['1', '2', '3', '4'].includes(operation)) {
+  prompt("Can only choose 1, 2, 3, or 4");
+  operation = READLINE.prompt();
 }
-console.log(`The result is: ${output}`);
+
+let output;
+
+switch (operation) {
+  case "1":
+    output = num1 + num2;
+    break;
+  case "2":
+    output = num1 - num2;
+    break;
+  case "3":
+    output = num1 * num2;
+    break;
+  case "4":
+    output = num1 / num2;
+    break;
+}
+prompt(`The result is: ${output}`);
