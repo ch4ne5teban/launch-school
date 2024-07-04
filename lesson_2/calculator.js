@@ -1,14 +1,35 @@
 const READLINE = require("readline-sync");
+const MESSAGES = require('./calculator_messages.json');
 
-function prompt(message) {
+function promptWithArrow(message) {
   console.log(`=> ${message}`);
 }
 
-function invalidNumber(num) {
+function isInputInvalid(num) {
   return num.trim() === '' || Number.isNaN(Number(num));
 }
 
-function performCalculation(num1, num2, operation) {
+function requestNumberInput(message) {
+  promptWithArrow(message);
+  let number = READLINE.prompt();
+  while (isInputInvalid(number)) {
+    promptWithArrow(MESSAGES.invalid_input);
+    number = READLINE.prompt();
+  }
+  return parseInt(number, 10);
+}
+
+function requestOperationChoice() {
+  promptWithArrow(MESSAGES.choose_operation);
+  let operation = READLINE.prompt();
+  while (!['1', '2', '3', '4'].includes(operation)) {
+    promptWithArrow(MESSAGES.operation_prompt);
+    operation = READLINE.prompt();
+  }
+  return operation;
+}
+
+function calculateResult(num1, num2, operation) {
   switch (operation) {
     case "1":
       return num1 + num2;
@@ -18,59 +39,40 @@ function performCalculation(num1, num2, operation) {
       return num1 * num2;
     case "4":
       while (num2 === 0) {
-        prompt("Cannot divide by zero. Enter a non-zero second number:");
-        num2 = promptInput("Please enter the second number:");
+        promptWithArrow(MESSAGES.divide_zero);
+        num2 = requestNumberInput(MESSAGES.enter_second_number);
       }
       return num1 / num2;
     default:
-      prompt("Invalid operation selected.");
+      prompt(MESSAGES.invalid_operation);
       return null;
   }
 }
 
-function promptInput(message) {
-  prompt(message);
-  let number = READLINE.prompt();
-  while (invalidNumber(number)) {
-    prompt("Invalid input. Enter a valid integer:");
-    number = READLINE.prompt();
-  }
-  return parseInt(number, 10);
+function performSingleCalculationCycle() {
+  let num1 = requestNumberInput(MESSAGES.enter_first_number);
+  let num2 = requestNumberInput(MESSAGES.enter_second_number);
+  let operation = requestOperationChoice();
+  let result = calculateResult(num1, num2, operation);
+  promptWithArrow(MESSAGES.result.replace('%result%', result));
 }
 
-function chooseOperation() {
-  prompt("What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide");
-  let operation = READLINE.prompt();
-  while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt("Can only choose 1, 2, 3, or 4:");
-    operation = READLINE.prompt();
-  }
-  return operation;
-}
-
-function processAnotherCalculation() {
-  prompt("Another calculation? Enter 'y' for yes or 'n' for no:");
+function askUserIfAnotherCalculation() {
+  promptWithArrow(MESSAGES.another_calculation);
   let userDecision = READLINE.prompt().toLowerCase();
   while (!['y', 'n'].includes(userDecision)) {
-    prompt("Can only choose 'y' or 'n':");
+    promptWithArrow(MESSAGES.yes_no_prompt);
     userDecision = READLINE.prompt().toLowerCase();
   }
   return userDecision === 'y';
 }
 
-function calculate() {
-  prompt("Welcome to Calculator!");
-  let num1 = promptInput("Please enter the first number:");
-  let num2 = promptInput("Please enter the second number:");
-  let operation = chooseOperation();
-  let result = performCalculation(num1, num2, operation);
-  prompt(`The result is: ${result}`);
-
-  if (processAnotherCalculation()) {
-    calculate();
-  } else {
-    prompt("Ciao, have a nice day!");
-  }
+function runCalculator() {
+  promptWithArrow(MESSAGES.welcome);
+  do {
+    performSingleCalculationCycle();
+  } while (askUserIfAnotherCalculation());
+  promptWithArrow(MESSAGES.goodbye);
 }
 
-calculate();
+runCalculator();

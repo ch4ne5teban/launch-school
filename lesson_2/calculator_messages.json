@@ -1,0 +1,14 @@
+{
+  "welcome": "Welcome to Calculator!",
+  "enter_first_number": "Please enter the first number:",
+  "enter_second_number": "Please enter the second number:",
+  "choose_operation": "What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+  "invalid_operation": "Invalid operation selected.",
+  "operation_reminder_prompt": "Can only choose 1, 2, 3, or 4:",
+  "invalid_input": "Invalid input. Enter a valid integer:",
+  "divide_zero": "Cannot divide by zero. Enter a non-zero second number:",
+  "result": "The result is: %result%",
+  "another_calculation": "Another calculation? Enter 'y' for yes or 'n' for no:",
+  "yes_no_prompt": "Can only choose 'y' or 'n':",
+  "goodbye": "Ciao, have a nice day!"
+}
