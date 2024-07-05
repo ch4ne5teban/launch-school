@@ -1,78 +1,126 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require('./calculator_messages.json');
 
-function promptWithArrow(message) {
+let currentLang;
+
+function selectLanguage() {
+  console.log("Select a language:\n Enter '1' for English, '2' for Spanish, or '3' for Hindi");
+  let choice = READLINE.prompt();
+  switch (choice) {
+    case '1':
+      return 'en';
+    case '2':
+      return 'es';
+    case '3':
+      return 'hi';
+    default:
+      return 'en';
+  }
+}
+
+const YES_NO_MAPPING = {
+  en: { yes: 'y', no: 'n' },
+  es: { yes: 's', no: 'n' },
+  hi: { yes: 'h', no: 'n' },
+};
+
+function makePromptDistinctive(message) {
   console.log(`=> ${message}`);
+}
+
+function clearConsole() {
+  console.clear();
 }
 
 function isInputInvalid(num) {
   return num.trim() === '' || Number.isNaN(Number(num));
 }
 
-function requestNumberInput(message) {
-  promptWithArrow(message);
+function getNumberInput(message) {
+  makePromptDistinctive(message);
   let number = READLINE.prompt();
   while (isInputInvalid(number)) {
-    promptWithArrow(MESSAGES.invalid_input);
+    clearConsole();
+    makePromptDistinctive(MESSAGES[currentLang].invalid_input);
     number = READLINE.prompt();
   }
   return parseInt(number, 10);
 }
 
-function requestOperationChoice() {
-  promptWithArrow(MESSAGES.choose_operation);
+function getOperationChoice() {
+  clearConsole();
+  makePromptDistinctive(MESSAGES[currentLang].choose_operation);
   let operation = READLINE.prompt();
   while (!['1', '2', '3', '4'].includes(operation)) {
-    promptWithArrow(MESSAGES.operation_prompt);
+    makePromptDistinctive(MESSAGES[currentLang].operation_reminder_prompt);
     operation = READLINE.prompt();
   }
   return operation;
 }
 
+function operationSymbol(operation) {
+  if (operation === "1") {
+    return "+";
+  } else if (operation === "2") {
+    return "-";
+  } else if (operation === "3") {
+    return "*";
+  } else return "/";
+}
+
 function calculateResult(num1, num2, operation) {
+  let symbol = operationSymbol(operation);
   switch (operation) {
     case "1":
-      return num1 + num2;
+      return [num1 + num2, symbol];
     case "2":
-      return num1 - num2;
+      return [num1 - num2, symbol];
     case "3":
-      return num1 * num2;
+      return [num1 * num2, symbol];
     case "4":
-      while (num2 === 0) {
-        promptWithArrow(MESSAGES.divide_zero);
-        num2 = requestNumberInput(MESSAGES.enter_second_number);
-      }
-      return num1 / num2;
+      return [num1 / num2, symbol];
     default:
-      prompt(MESSAGES.invalid_operation);
+      prompt(MESSAGES[currentLang].operation_reminder_prompt);
       return null;
   }
 }
 
 function performSingleCalculationCycle() {
-  let num1 = requestNumberInput(MESSAGES.enter_first_number);
-  let num2 = requestNumberInput(MESSAGES.enter_second_number);
-  let operation = requestOperationChoice();
-  let result = calculateResult(num1, num2, operation);
-  promptWithArrow(MESSAGES.result.replace('%result%', result));
+  console.clear();
+  let num1 = getNumberInput(MESSAGES[currentLang].enter_first_number);
+  let num2 = getNumberInput(MESSAGES[currentLang].enter_second_number);
+  let operation = getOperationChoice();
+  if (operation === '4' && num2 === 0) {
+    while (num2 === 0) {
+      makePromptDistinctive(MESSAGES[currentLang].divide_zero);
+      num2 = getNumberInput(MESSAGES[currentLang].enter_second_number);
+    }
+  }
+  let [result, symbol] = calculateResult(num1, num2, operation);
+  clearConsole();
+  makePromptDistinctive(`${num1} ${symbol} ${num2} = ${result}`);
 }
 
 function askUserIfAnotherCalculation() {
-  promptWithArrow(MESSAGES.another_calculation);
+  makePromptDistinctive(MESSAGES[currentLang].another_calculation);
   let userDecision = READLINE.prompt().toLowerCase();
-  while (!['y', 'n'].includes(userDecision)) {
-    promptWithArrow(MESSAGES.yes_no_prompt);
+  while (!userDecision.includes(YES_NO_MAPPING[currentLang].yes) &&
+  !userDecision.includes(YES_NO_MAPPING[currentLang].no)) {
+    clearConsole();
+    makePromptDistinctive(MESSAGES[currentLang].yes_no_prompt);
     userDecision = READLINE.prompt().toLowerCase();
   }
-  return userDecision === 'y';
+  return userDecision.includes(YES_NO_MAPPING[currentLang].yes);
 }
 
 function runCalculator() {
-  promptWithArrow(MESSAGES.welcome);
+  currentLang = selectLanguage();
+  makePromptDistinctive(MESSAGES[currentLang].welcome);
   do {
     performSingleCalculationCycle();
   } while (askUserIfAnotherCalculation());
-  promptWithArrow(MESSAGES.goodbye);
+  clearConsole();
+  makePromptDistinctive(MESSAGES[currentLang].goodbye);
 }
 
 runCalculator();

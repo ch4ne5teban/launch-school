@@ -1,14 +1,40 @@
 {
-  "welcome": "Welcome to Calculator!",
-  "enter_first_number": "Please enter the first number:",
-  "enter_second_number": "Please enter the second number:",
-  "choose_operation": "What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide",
-  "invalid_operation": "Invalid operation selected.",
-  "operation_reminder_prompt": "Can only choose 1, 2, 3, or 4:",
-  "invalid_input": "Invalid input. Enter a valid integer:",
-  "divide_zero": "Cannot divide by zero. Enter a non-zero second number:",
-  "result": "The result is: %result%",
-  "another_calculation": "Another calculation? Enter 'y' for yes or 'n' for no:",
-  "yes_no_prompt": "Can only choose 'y' or 'n':",
-  "goodbye": "Ciao, have a nice day!"
+  "en": {  
+    "welcome": "Welcome to Calculator!",
+    "enter_first_number": "Please enter the first number:",
+    "enter_second_number": "Please enter the second number:",
+    "choose_operation": "What operation would you like to carry out on these numbers?\n1) Add 2) Subtract 3) Multiply 4) Divide",
+    "operation_reminder_prompt": "Invalid operation selected. You can only choose 1, 2, 3, or 4:",
+    "invalid_input": "Invalid input. Enter a valid integer:",
+    "divide_zero": "Cannot divide by zero. Enter a non-zero second number:",
+    "another_calculation": "Another calculation? Enter 'y' for yes or 'n' for no:",
+    "yes_no_prompt": "Can only choose 'y' or 'n':",
+    "goodbye": "Ciao, have a nice day!"
+  },
+
+  "es": {
+    "welcome": "¡Bienvenido a tu Calculador!",
+    "enter_first_number": "Por favor, introduce el primer número:",
+    "enter_second_number": "Por favor, introduce el segundo número:",
+    "choose_operation": "¿Qué operación te gustaría realizar con estos números?\n1) Sumar 2) Restar 3) Multiplicar 4) Dividir",
+    "operation_reminder_prompt": "Operación inválida seleccionada. Solo puedes elegir 1, 2, 3 o 4:",
+    "invalid_input": "Entrada inválida. Introduce un número entero válido:",
+    "divide_zero": "No se puede dividir por cero. Introduce un segundo número que no sea cero:",
+    "another_calculation": "¿Otra calculación? Escribe 's' para sí o 'n' para no:",
+    "yes_no_prompt": "Solo puedes elegir 's' o 'n':",
+    "goodbye": "Ciao, que tengas un buen día!"
+  },
+
+  "hi": {
+    "welcome": "कैलकुलेटर में आपका स्वागत है!",
+    "enter_first_number": "पहला नंबर डालें:",
+    "enter_second_number": "दूसरा नंबर डालें:",
+    "choose_operation": "आप कौन सा ऑपरेशन करना चाहेंगे? १) जोड़ना २) घटाना ३) गुणा ४) भाग देना",
+    "operation_reminder_prompt": "चुना गया ऑपरेशन गलत है। आप सिर्फ १, २, ३, या ४ चुन सकते हैं:",
+    "invalid_input": "गलत इनपुट। एक सही पूर्णांक डालें:",
+    "divide_zero": "शून्य से विभाजन नहीं किया जा सकता। दूसरा नंबर शून्य नहीं होना चाहिए:",
+    "another_calculation": "क्या आप एक और गणना करना चाहेंगे? 'हां' के लिए 'h' दर्ज करें या 'नहीं' के लिए 'n':",
+    "yes_no_prompt": "आप सिर्फ 'h' या 'n' चुन सकते हैं:",
+    "goodbye": "अलविदा, आपका दिन अच्छा हो!"
+  }
 }
