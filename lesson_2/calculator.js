@@ -104,13 +104,13 @@ function performSingleCalculationCycle() {
 function askUserIfAnotherCalculation() {
   makePromptDistinctive(MESSAGES[currentLang].another_calculation);
   let userDecision = READLINE.prompt().toLowerCase();
-  while (!userDecision.includes(YES_NO_MAPPING[currentLang].yes) &&
-  !userDecision.includes(YES_NO_MAPPING[currentLang].no)) {
+  while (userDecision !== YES_NO_MAPPING[currentLang].yes &&
+    userDecision !== YES_NO_MAPPING[currentLang].no) {
     clearConsole();
     makePromptDistinctive(MESSAGES[currentLang].yes_no_prompt);
     userDecision = READLINE.prompt().toLowerCase();
   }
-  return userDecision.includes(YES_NO_MAPPING[currentLang].yes);
+  return userDecision === YES_NO_MAPPING[currentLang].yes;
 }
 
 function runCalculator() {
