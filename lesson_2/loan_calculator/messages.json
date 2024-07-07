@@ -1,0 +1,32 @@
+{
+  "en": {
+    "principal_prompt": "Enter the loan amount:",
+    "interest_prompt": "Enter the interest rate (annual %):",
+    "term_prompt": "Enter the loan term (in years):",
+    "invalid_input": "Invalid input, please try again.",
+    "result": "Your monthly payment is: ",
+    "another_calculation": "Do you want to perform another calculation? (y/n):",
+    "yes_no_prompt": "Please enter 'y' for yes or 'n' for no:",
+    "goodbye": "It was a pleasure assisting you with your loan calculations today. We look forward to helping you again soon. Take care!"
+  },
+  "es": {
+    "principal_prompt": "Introduce el monto del préstamo:",
+    "interest_prompt": "Introduce la tasa de interés (anual %):",
+    "term_prompt": "Introduce el plazo del préstamo (en años):",
+    "invalid_input": "Entrada no válida, intenta de nuevo.",
+    "result": "Tu pago mensual es: ",
+    "another_calculation": "¿Quieres realizar otro cálculo? (s/n):",
+    "yes_no_prompt": "Por favor, introduce 's' para sí o 'n' para no:",
+    "goodbye": "Fue un placer asistirle con sus cálculos financieros hoy. Esperamos poder ayudarle nuevamente pronto. ¡Cuídese!"
+  },
+  "hi": {
+    "principal_prompt": "ऋण राशि दर्ज करें:",
+    "interest_prompt": "ब्याज दर दर्ज करें (वार्षिक %):",
+    "term_prompt": "ऋण अवधि दर्ज करें (वर्षों में):",
+    "invalid_input": "अमान्य इनपुट, कृपया पुनः प्रयास करें।",
+    "result": "आपकी मासिक भुगतान राशि है: ",
+    "another_calculation": "क्या आप एक और गणना करना चाहते हैं? (हाँ/नहीं):",
+    "yes_no_prompt": "कृपया हाँ के लिए 'h' और नहीं के लिए 'n' दर्ज करें:",
+    "goodbye": "आज आपकी वित्तीय गणना में आपकी सहायता करके हमें खुशी हुई। हम जल्द ही फिर से आपकी मदद करने की उम्मीद करते हैं। आपका दिन शुभ हो!"
+  }
+}
