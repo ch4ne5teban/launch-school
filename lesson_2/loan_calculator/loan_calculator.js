@@ -100,7 +100,7 @@ runLoanCalculator();
 let currentLang;
 
 function selectLanguage() {
-  console.log("Select a language:\n 
+  console.log("Select a language:\n
   Enter '1' for English, '2' for Spanish, or '3' for Hindi");
   let choice = READLINE.prompt();
   switch (choice) {
