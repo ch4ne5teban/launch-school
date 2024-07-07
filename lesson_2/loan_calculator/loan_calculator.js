@@ -1,28 +1,29 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require("./messages.json");
 
-let currentLang = selectLanguage();
-
-function clearConsole() {
-  console.clear();
-}
-
 function distinctivePrompt(message) {
   console.log(`=> ${message}`);
 }
 
 function selectLanguage() {
-  clearConsole();
-  distinctivePrompt("Hello there, select a language:\n Enter '1' for English, '2' for Spanish, or '3' for Hindi");
+  console.clear();
+  distinctivePrompt(MESSAGES['welcome']);
   const languages = ['en', 'es', 'hi'];
   let langChoice = parseInt(READLINE.prompt(), 10) - 1;
-  return languages[langChoice] || 'en';
+  while ((isNaN(langChoice)) || (langChoice < 0)
+    || (langChoice >= languages.length)) {
+    console.clear();
+    distinctivePrompt(MESSAGES['invalid_language_choice']);
+    langChoice = parseInt(READLINE.prompt(), 10) - 1;
+  }
+  return languages[langChoice];
 }
 
-function getValidInput(message, type) {
+function getValidInput(message, type, currentLang) {
   distinctivePrompt(message);
   let input = READLINE.prompt();
   while (!isValidInput(input, type)) {
+    console.clear();
     distinctivePrompt(MESSAGES[currentLang]['invalid_input']);
     input = READLINE.prompt();
   }
@@ -58,7 +59,7 @@ function calcMonthlyRepaymentAmount(principal,
   }
 }
 
-function askUserIfAnotherCalculation() {
+function askUserIfAnotherCalculation(currentLang) {
   const YES_NO_MAPPING = {
     en: { yes: ['y', 'yes'], no: ['n', 'no'] },
     es: { yes: ['s', 'si'], no: ['n', 'no'] },
@@ -70,15 +71,16 @@ function askUserIfAnotherCalculation() {
   const validYes = YES_NO_MAPPING[currentLang]['yes'];
   const validNo = YES_NO_MAPPING[currentLang]['no'];
   while (!validYes.includes(userDecision) && !validNo.includes(userDecision)) {
+    console.clear();
     distinctivePrompt(MESSAGES[currentLang]['yes_no_prompt']);
     userDecision = READLINE.prompt().toLowerCase();
   }
   return validYes.includes(userDecision);
 }
 
-function runLoanCalculator() {
+function runLoanCalculator(currentLang) {
   do {
-    clearConsole();
+    console.clear();
     const principal = getValidInput(MESSAGES[currentLang]['principal_prompt'], 'float');
     const annualInterestRate = getValidInput(MESSAGES[currentLang]['interest_prompt'], 'float');
     const termInYears = getValidInput(MESSAGES[currentLang]['term_prompt'], 'int');
@@ -86,14 +88,15 @@ function runLoanCalculator() {
     const termInMonths = calcTermInMonths(termInYears);
     const monthlyPayment = calcMonthlyRepaymentAmount(principal,
       monthlyInterestRate, termInMonths);
-    clearConsole();
+    console.clear();
     distinctivePrompt(`${MESSAGES[currentLang]['result']} $${monthlyPayment.toFixed(2)}`);
   } while (askUserIfAnotherCalculation());
-  clearConsole();
+  console.clear();
   distinctivePrompt(MESSAGES[currentLang]['goodbye']);
 }
 
-runLoanCalculator();
+let currentLang = selectLanguage();
+runLoanCalculator(currentLang);
 
 
 /* before refactoring:
