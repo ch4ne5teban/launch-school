@@ -1,6 +1,9 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require("./messages.json");
 
+let currentLang = selectLanguage();
+let currentCurrency = selectCurrency(currentLang);
+
 function distinctivePrompt(message) {
   console.log(`=> ${message}`);
 }
@@ -19,7 +22,16 @@ function selectLanguage() {
   return languages[langChoice];
 }
 
-function getValidInput(message, type, currentLang) {
+function selectCurrency(language) {
+  const currencyMap = { en: 'USD', es: 'EUR', hi: 'INR' };
+  return currencyMap[language];
+}
+
+function formatCurrency(amount, currency, language) {
+  return new Intl.NumberFormat(language, { style: 'currency', currency: currency }).format(amount);
+}
+
+function getValidInput(message, type) {
   distinctivePrompt(message);
   let input = READLINE.prompt();
   while (!isValidInput(input, type)) {
@@ -59,7 +71,7 @@ function calcMonthlyRepaymentAmount(principal,
   }
 }
 
-function askUserIfAnotherCalculation(currentLang) {
+function askUserIfAnotherCalculation() {
   const YES_NO_MAPPING = {
     en: { yes: ['y', 'yes'], no: ['n', 'no'] },
     es: { yes: ['s', 'si'], no: ['n', 'no'] },
@@ -78,7 +90,7 @@ function askUserIfAnotherCalculation(currentLang) {
   return validYes.includes(userDecision);
 }
 
-function runLoanCalculator(currentLang) {
+function runLoanCalculator() {
   do {
     console.clear();
     const principal = getValidInput(MESSAGES[currentLang]['principal_prompt'], 'float');
@@ -88,15 +100,16 @@ function runLoanCalculator(currentLang) {
     const termInMonths = calcTermInMonths(termInYears);
     const monthlyPayment = calcMonthlyRepaymentAmount(principal,
       monthlyInterestRate, termInMonths);
+    const formattedPayment = formatCurrency(monthlyPayment,
+      currentCurrency, currentLang);
     console.clear();
-    distinctivePrompt(`${MESSAGES[currentLang]['result']} $${monthlyPayment.toFixed(2)}`);
+    distinctivePrompt(`${MESSAGES[currentLang]['result']} ${formattedPayment}`);
   } while (askUserIfAnotherCalculation());
   console.clear();
   distinctivePrompt(MESSAGES[currentLang]['goodbye']);
 }
 
-let currentLang = selectLanguage();
-runLoanCalculator(currentLang);
+runLoanCalculator();
 
 
 /* before refactoring:
