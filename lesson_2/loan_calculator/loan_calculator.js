@@ -1,14 +1,14 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require("./messages.json");
 
-let currentLang = selectLanguage();
-let currentCurrency = selectCurrency(currentLang);
+let currentLang = getUserLanguage();
+let currentCurrency = setUserCurrency(currentLang);
 
 function distinctivePrompt(message) {
   console.log(`=> ${message}`);
 }
 
-function selectLanguage() {
+function getUserLanguage() {
   console.clear();
   distinctivePrompt(MESSAGES['welcome']);
   const languages = ['en', 'es', 'hi'];
@@ -22,12 +22,12 @@ function selectLanguage() {
   return languages[langChoice];
 }
 
-function selectCurrency(language) {
+function setUserCurrency(language) {
   const currencyMap = { en: 'USD', es: 'EUR', hi: 'INR' };
   return currencyMap[language];
 }
 
-function formatCurrency(amount, currency, language) {
+function setCurrencyFormat(amount, currency, language) {
   return new Intl.NumberFormat(language, { style: 'currency', currency: currency }).format(amount);
 }
 
@@ -43,9 +43,32 @@ function getValidInput(message, type) {
 }
 
 function isValidInput(input, type) {
-  input = input.replace('%', '').trim();
-  return type === 'float' ? !isNaN(parseFloat(input))
-    : !isNaN(parseInt(input, 10)) && parseInt(input, 10) > 0;
+  let cleanedInput = input.trim();
+  if (type === 'float') {
+    return isValidFloat(cleanedInput);
+  } else if (type === 'int') {
+    return isValidInteger(cleanedInput);
+  }
+  return false;
+}
+
+function isValidFloat(input) {
+  let inputWithoutPercent = input.endsWith('%') ? input.slice(0, -1) : input;
+  if (!/^\d*\.?\d+$/.test(inputWithoutPercent)) {
+    return false;
+  }
+  let floatValue = parseFloat(inputWithoutPercent);
+  let isParsedCorrectly = parseFloat(floatValue.toString()) === floatValue;
+  return !isNaN(floatValue) && floatValue >= 0 && isParsedCorrectly;
+}
+
+function isValidInteger(input) {
+  if (!/^\d+$/.test(input)) {
+    return false;
+  }
+  let intValue = parseInt(input, 10);
+  let isInputMatch = intValue.toString() === input;
+  return !isNaN(intValue) && intValue > 0 && isInputMatch;
 }
 
 function calcMonthlyInterestRate(interestRate) {
@@ -71,7 +94,7 @@ function calcMonthlyRepaymentAmount(principal,
   }
 }
 
-function askUserIfAnotherCalculation() {
+function userWantsAnotherCalc() {
   const YES_NO_MAPPING = {
     en: { yes: ['y', 'yes'], no: ['n', 'no'] },
     es: { yes: ['s', 'si'], no: ['n', 'no'] },
@@ -90,7 +113,7 @@ function askUserIfAnotherCalculation() {
   return validYes.includes(userDecision);
 }
 
-function runLoanCalculator() {
+function runEMICalculator() {
   do {
     console.clear();
     const principal = getValidInput(MESSAGES[currentLang]['principal_prompt'], 'float');
@@ -100,16 +123,16 @@ function runLoanCalculator() {
     const termInMonths = calcTermInMonths(termInYears);
     const monthlyPayment = calcMonthlyRepaymentAmount(principal,
       monthlyInterestRate, termInMonths);
-    const formattedPayment = formatCurrency(monthlyPayment,
+    const formattedPayment = setCurrencyFormat(monthlyPayment,
       currentCurrency, currentLang);
     console.clear();
     distinctivePrompt(`${MESSAGES[currentLang]['result']} ${formattedPayment}`);
-  } while (askUserIfAnotherCalculation());
+  } while (userWantsAnotherCalc());
   console.clear();
   distinctivePrompt(MESSAGES[currentLang]['goodbye']);
 }
 
-runLoanCalculator();
+runEMICalculator();
 
 
 /* before refactoring:
