@@ -1,5 +1,5 @@
 {
-  "welcome": "Hello there, select a language:\n Enter '1' for English, '2' for Spanish, or '3' for Hindi",
+  "welcome": "Hello there, welcome to your EMI calculator.\n Select a language:\n Enter '1' for English, '2' for Spanish, or '3' for Hindi",
   "invalid_language_choice": "Invalid choice. Enter '1' for English, '2' for Spanish, or '3' for Hindi",
   "en": {
     "principal_prompt": "Enter the loan amount:",
