@@ -1,0 +1,52 @@
+{
+  "welcome": "Welcome! Please select your language:",
+  "invalid_language_choice": "Invalid choice. Please select a valid language option:",
+  "languages": {
+    "en": {
+      "rules": ">>> Rock, Paper and Scissors (Lizard & Spock) game rules <<<\n| Scissors cuts Paper                                     |\n| Paper covers Rock                                       |\n| Rock crushes Lizard                                     |\n| Lizard poisons Spock                                    |\n| Spock smashes Scissors                                  |\n| Scissors decapitates Lizard                             |\n| Lizard eats Paper                                       |\n| Paper disproves Spock                                   |\n| Spock vaporizes Rock                                    |\n| and as it always has, Rock crushes Scissors             |\n>>> ************************************************** <<<      \n Best of three wins! Good luck!",
+      "options": "Choose one: Rock (enter 'rock', 'r', or '1'),\n Paper (enter 'paper', 'p', or '2'),\n Scissors (enter 'scissors', 'sc', or '3'),\n Lizard (enter 'lizard', 'l', or '4'),\n Spock (enter 'spock', 'sp', or '5').\n Please type your choice and press enter.",
+      "invalid_choice": "Invalid choice. Please enter a valid option.",
+      "user_wins_round": "You win this round!",
+      "computer_wins_round": "Computer wins this round!",
+      "tie_round": "It's a tie!",
+      "win_game": "CONGRATULATIONS! YOU WIN! 🕺 💃 🎊",
+      "lose_game": "Sorry, you lost this time! 😢",
+      "tie_game": "Final Score: It's a tie! 🤝 You and the computer won a round each.",
+      "another_round": "Do you want to play again? (y/n)",
+      "yes_no_prompt": "Please answer 'y' for yes or 'n' for no.",
+      "yes": ["y", "yes"],
+      "no": ["n", "no"],
+      "thanks": "Thanks for playing! Come back soon!"
+    },
+    "es": {
+      "rules": "[Spanish rules]",
+      "options": "[Spanish options]",
+      "invalid_choice": "[Spanish invalid choice]",
+      "tie": "[Spanish tie]",
+      "win": "[Spanish win]",
+      "lose": "[Spanish lose]",
+      "another_round": "¿Quieres jugar otra ronda? (s/n)",
+      "yes_no_prompt": "Por favor responde 's' para sí o 'n' para no.",
+      "yes": ["s", "si"],
+      "no": ["n", "no"],
+      "user_wins_round": "¡Ganas la ronda!",
+      "computer_wins_round": "El ordenador gana la ronda!",
+      "thanks": "¡Gracias por jugar!"
+    },
+    "hi": {
+      "rules": "[Hindi rules]",
+      "options": "[Hindi options]",
+      "invalid_choice": "[Hindi invalid choice]",
+      "tie": "[Hindi tie]",
+      "win": "[Hindi win]",
+      "lose": "[Hindi lose]",
+      "another_round": "क्या आप एक और दौर खेलना चाहते हैं? (हां/न)",
+      "yes_no_prompt": "कृपया 'हां' के लिए ह और 'न' के लिए न दबाएँ।",
+      "yes": ["ह", "हां"],
+      "no": ["न", "नहीं"],
+      "user_wins_round": "आप दौर जीतते हैं!",
+      "computer_wins_round": "कंप्यूटर दौर जीतता है!",
+      "thanks": "खेलने के लिए धन्यवाद!"
+    }
+  }
+}
