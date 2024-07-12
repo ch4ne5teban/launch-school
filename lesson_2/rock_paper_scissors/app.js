@@ -9,7 +9,9 @@ const USER_CHOICE_MAP = {
   4: "lizard", l: "lizard", lizard: "lizard",
   5: "spock", sp: "spock", spock: "spock"
 };
-const WINNING_SCENARIOS = ["rockscissors", "rocklizard", "paperspock", "paperrock", "scissorspaper", "scissorslizard", "spockscissors", "spockrock", "lizardspock", "lizardpaper"];
+const WINNING_SCENARIOS = ["rockscissors", "rocklizard", "paperspock",
+  "paperrock", "scissorspaper", "scissorslizard",
+  "spockscissors", "spockrock", "lizardspock", "lizardpaper"];
 
 let currentLang = getUserLanguage();
 
@@ -126,7 +128,7 @@ function displayFinalGameOutcome(userWins, computerWins) {
   }
 }
 
-function userWantsAnotherRound() {
+function userWantsAnotherGame() {
   distinctivePrompt(MESSAGES.languages[currentLang]['another_round']);
   let userDecision = READLINE.question().toLowerCase();
   while (!MESSAGES.languages[currentLang]['yes'].includes(userDecision) && !MESSAGES.languages[currentLang]['no'].includes(userDecision)) {
@@ -142,7 +144,7 @@ function runGame() {
   do {
     displayRules();
     playThreeRounds();
-  } while (userWantsAnotherRound());
+  } while (userWantsAnotherGame());
   console.clear();
   distinctivePrompt(MESSAGES.languages[currentLang]['thanks']);
 }
