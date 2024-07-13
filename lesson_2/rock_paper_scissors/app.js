@@ -1,23 +1,11 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require("./messages.json");
 
-const VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"];
-const USER_CHOICE_MAP = {
-  1: "rock", r: "rock", rock: "rock",
-  2: "paper", p: "paper", paper: "paper",
-  3: "scissors", sc: "scissors", scissors: "scissors",
-  4: "lizard", l: "lizard", lizard: "lizard",
-  5: "spock", sp: "spock", spock: "spock"
-};
-const WINNING_SCENARIOS = ["rockscissors", "rocklizard", "paperspock",
-  "paperrock", "scissorspaper", "scissorslizard",
-  "spockscissors", "spockrock", "lizardspock", "lizardpaper"];
-
-let currentLang = getUserLanguage();
-
 function distinctivePrompt(message) {
   console.log(`=> ${message}`);
 }
+
+let currentLang = getUserLanguage();
 
 function getUserLanguage() {
   console.clear();
@@ -48,6 +36,13 @@ function displayRules() {
 }
 
 function getUserChoice() {
+  const USER_CHOICE_MAP = {
+    1: "rock", r: "rock", rock: "rock",
+    2: "paper", p: "paper", paper: "paper",
+    3: "scissors", sc: "scissors", scissors: "scissors",
+    4: "lizard", l: "lizard", lizard: "lizard",
+    5: "spock", sp: "spock", spock: "spock"
+  };
   distinctivePrompt(MESSAGES.languages[currentLang]['options']);
   let choice = READLINE.question().toLowerCase().trim();
   while (!USER_CHOICE_MAP.hasOwnProperty(choice)) {
@@ -61,11 +56,16 @@ function getUserChoice() {
 
 function getComputerChoice() {
   console.clear();
+  const VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"];
   let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
   return VALID_CHOICES[randomIndex];
 }
 
 function gameLogic(userChoice, computerChoice) {
+  const WINNING_SCENARIOS = ["rockscissors", "rocklizard", "paperspock",
+    "paperrock", "scissorspaper", "scissorslizard",
+    "spockscissors", "spockrock", "lizardspock", "lizardpaper"];
+
   if (userChoice === computerChoice) {
     return 'tie';
   }
@@ -150,4 +150,3 @@ function runGame() {
 }
 
 runGame();
-
