@@ -45,7 +45,7 @@ function getUserChoice() {
   };
   distinctivePrompt(MESSAGES.languages[currentLang]['options']);
   let choice = READLINE.question().toLowerCase().trim();
-  while (!USER_CHOICE_MAP.hasOwnProperty(choice)) {
+  while (!Object.hasOwn(USER_CHOICE_MAP, choice)) {
     console.clear();
     distinctivePrompt(MESSAGES.languages[currentLang]['invalid_choice']);
     distinctivePrompt(MESSAGES.languages[currentLang]['options']);
@@ -117,6 +117,7 @@ function playThreeRounds() {
 }
 
 function displayFinalGameOutcome(userWins, computerWins) {
+  console.clear();
   if (userWins > computerWins) {
     distinctivePrompt(`Final Score: You won ${userWins} ${(userWins === 1) ? "round" : "rounds"}. ${(computerWins === 0) ? "Computer didn't win any" : "Computer won 1 round"}.`);
     distinctivePrompt(MESSAGES.languages[currentLang]['win_game']);
