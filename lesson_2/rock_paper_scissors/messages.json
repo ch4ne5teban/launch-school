@@ -19,7 +19,7 @@
       "thanks": "Thanks for playing! Come back soon!"
     },
     "es": {
-      "rules": ">>> Reglas del juego Piedra, Papel y Tijeras (Lagarto y Spock) <<<\n| Las tijeras cortan el papel                                 |\n| El papel cubre la piedra                                   |\n| La piedra aplasta al lagarto                               |\n| El lagarto envenena a Spock                                |\n| Spock destroza las tijeras                                 |\n| Las tijeras decapitan al lagarto                           |\n| El lagarto se come el papel                                |\n| El papel refuta a Spock                                    |\n| Spock vaporiza la piedra                                   |\n| y como siempre, la piedra aplasta las tijeras              |\n>>> ************************************************** <<<\n ¡El mejor de tres gana! ¡Buena suerte!",
+      "rules": ">>> Reglas del juego Piedra, Papel y Tijeras (Lagarto y Spock) <<<\n| Las tijeras cortan el papel                                 |\n| El papel cubre la piedra                                   |\n| La piedra aplasta al lagarto                               |\n| El lagarto envenena a Spock                                |\n| Spock destroza las tijeras                                 |\n| Las tijeras decapitan al lagarto                           |\n| El lagarto se come el papel                                |\n| El papel refuta a Spock                                    |\n| Spock vaporiza la piedra                                   |\n| y como siempre, la piedra aplasta las tijeras              |\n>>> ************************************************** <<<\n ¡El mejor de tres gana! ¡Suerte!",
       "options": "Elige una: Piedra (escribe 'piedra', 'p', o '1'),\n Papel (escribe 'papel', 'p', o '2'),\n Tijeras (escribe 'tijeras', 't', o '3'),\n Lagarto (escribe 'lagarto', 'l', o '4'),\n Spock (escribe 'spock', 's', o '5').\n Por favor, escribe tu elección y presiona enter.",
       "invalid_choice": "Elección inválida. Por favor, introduce una opción válida.",
       "user_wins_round": "¡Ganas esta ronda!",
@@ -29,7 +29,7 @@
       "lose_game": "Lo siento, perdiste esta vez! 😢",
       "tie_game": "Puntuación final: ¡Es un empate! 🤝 Tú y la computadora ganaron una ronda cada uno.",
       "another_round": "¿Quieres jugar de nuevo? (s/n)",
-      "yes_no_prompt": "Por favor responde 's' para sí o 'n' para no.",
+      "yes_no_prompt": "Por favor responde con una 's' para sí o 'n' para no.",
       "yes": ["s", "sí"],
       "no": ["n", "no"],
       "thanks": "¡Gracias por jugar! ¡Vuelve pronto!"

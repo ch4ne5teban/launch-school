@@ -1,6 +1,29 @@
 const READLINE = require("readline-sync");
 const MESSAGES = require("./messages.json");
 
+const CHOICES = {
+  rock: {
+    validInputs: ["1", "r", "rock"],
+    winningScenarios: ["rockscissors", "rocklizard"]
+  },
+  paper: {
+    validInputs: ["2", "p", "paper"],
+    winningScenarios: ["paperrock", "paperspock"]
+  },
+  scissors: {
+    validInputs: ["3", "sc", "scissors"],
+    winningScenarios: ["scissorspaper", "scissorslizard"]
+  },
+  lizard: {
+    validInputs: ["4", "l", "lizard"],
+    winningScenarios: ["lizardspock", "lizardpaper"]
+  },
+  spock: {
+    validInputs: ["5", "sp", "spock"],
+    winningScenarios: ["spockscissors", "spockrock"]
+  }
+};
+
 function distinctivePrompt(message) {
   console.log(`=> ${message}`);
 }
@@ -36,41 +59,40 @@ function displayRules() {
 }
 
 function getUserChoice() {
-  const USER_CHOICE_MAP = {
-    1: "rock", r: "rock", rock: "rock",
-    2: "paper", p: "paper", paper: "paper",
-    3: "scissors", sc: "scissors", scissors: "scissors",
-    4: "lizard", l: "lizard", lizard: "lizard",
-    5: "spock", sp: "spock", spock: "spock"
-  };
   distinctivePrompt(MESSAGES.languages[currentLang]['options']);
-  let choice = READLINE.question().toLowerCase().trim();
-  while (!Object.hasOwn(USER_CHOICE_MAP, choice)) {
+
+  function findChoice(input) {
+    return Object.keys(CHOICES).find(key =>
+      CHOICES[key].validInputs.includes(input)
+    );
+  }
+
+  let input = READLINE.question().toLowerCase().trim();
+  let choice = findChoice(input);
+
+  while (!choice) {
     console.clear();
     distinctivePrompt(MESSAGES.languages[currentLang]['invalid_choice']);
     distinctivePrompt(MESSAGES.languages[currentLang]['options']);
-    choice = READLINE.question().toLowerCase().trim();
+    input = READLINE.question().toLowerCase().trim();
+    choice = findChoice(input);
   }
-  return USER_CHOICE_MAP[choice];
+
+  return choice;
 }
 
 function getComputerChoice() {
   console.clear();
-  const VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"];
-  let randomIndex = Math.floor(Math.random() * VALID_CHOICES.length);
-  return VALID_CHOICES[randomIndex];
+  const choices = Object.keys(CHOICES);
+  let randomIndex = Math.floor(Math.random() * choices.length);
+  return choices[randomIndex];
 }
 
 function gameLogic(userChoice, computerChoice) {
-  const WINNING_SCENARIOS = ["rockscissors", "rocklizard", "paperspock",
-    "paperrock", "scissorspaper", "scissorslizard",
-    "spockscissors", "spockrock", "lizardspock", "lizardpaper"];
-
+  let scenario = userChoice.concat(computerChoice);
   if (userChoice === computerChoice) {
     return 'tie';
-  }
-  let scenario = userChoice.concat(computerChoice);
-  if (WINNING_SCENARIOS.includes(scenario)) {
+  } else if (CHOICES[userChoice].winningScenarios.includes(scenario)) {
     return 'win';
   } else {
     return 'lose';
