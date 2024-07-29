@@ -12,22 +12,51 @@ Tested values are all between 0 and 100. There is no need to check for negative 
 */
 
 function getGrade(numScore1, numScore2, numScore3) {
+  
   let meanScore = (numScore1 + numScore2 + numScore3) / 3;
   
-  if (meanScore >= 90) {
-    return 'A';
-  } else if (meanScore >= 80) {
-      return 'B';
-  } else if (meanScore >= 70) {
-      return 'C';
-  } else if (meanScore >= 60) {
-      return 'D';
-  } else {
-      return 'F';
+  if (meanScore >= 90) return 'A';
+  if (meanScore >= 80) return 'B';
+  if (meanScore >= 70) return 'C';
+  if (meanScore >= 60) return 'D';
+  return 'F';
+}
+
+// r.afansiev's solution:
+
+const GRADE_MAP = {
+  A: (grade) => grade >= 90 && grade <= 100,
+  B: (grade) => grade >= 80 && grade < 90,
+  C: (grade) => grade >= 70 && grade < 80,
+  D: (grade) => grade >= 60 && grade < 70,
+  F: (grade) => grade >= 0 && grade < 60,
+};
+
+function getGrade(grade1, grade2, grade3) {
+  let mean = (grade1 + grade2 + grade3) / 3;
+  for (let key in GRADE_MAP) {
+    if (GRADE_MAP[key](mean)) return key;
   }
 }
 
-//`switch` doesn't do range-based comparisons
+//`switch` doesn't do range-based comparisons. But see Brandon Corey's solution:
+function getGrade(grade1, grade2, grade3) {
+  let mean = ((grade1 + grade2 + grade3) / 3);
+  mean = Math.floor(mean / 10);
+  switch (mean) {
+    case 10: // edge case
+      return 'A';
+    case 9:
+      return 'A';
+    case 8:
+      return 'B';
+    case 7:
+      return 'C';
+    case 6:
+      return 'D';
+  }
+  return 'F';
+}
 
 console.log(getGrade(95, 90, 93));    // "A"
 console.log(getGrade(50, 50, 95));    // "D"
