@@ -7,10 +7,10 @@ function century(year) {
   let century = yearString.substring(0, yearString.length - 2);
 
   if (yearString[yearString.length - 1] === "0") {
-    return century;
+    return appendSuffix(century);
   } else {
     century = `${(Number(century) + 1)}`;
-    return century;
+    return appendSuffix(century);
   }
 }
 
