@@ -5,9 +5,11 @@ Write a function that takes an array as an argument and returns an array that co
 function halvsies(array) {
   let halvsies = [[], []];
 
-  if (array.length  % 2 == 0) {
-    halvsies[0] = array.indexOf(array
+  arrayHalf = Math.ceil(array.length / 2)
+  halvsies[0] = [...array.slice(0, arrayHalf)];
+  halvsies[1] = [...array.slice(arrayHalf)];
 
+  return halvsies;
 }
 
 console.log(halvsies([1, 2, 3, 4]));       // [[1, 2], [3, 4]]
