@@ -5,9 +5,9 @@ Write a function that takes a floating point number representing an angle betwee
 function dms(number) {
   let degrees = Math.floor(number);
   let minutes = Math.floor((number - degrees) * 60);
-  let seconds = Math.round((number - degrees) * 3600 - (minutes * 60));
+  let seconds = Math.floor((((number - degrees) * 60) - minutes) * 60);
 
-  console.log(`${String(degrees)}°${String(minutes).padStart(2, '0')}'${String(seconds).padStart(2, '0')}"`);
+  return `${String(degrees)}°${String(minutes).padStart(2, '0')}'${String(seconds).padStart(2, '0')}"`;
 }
 
 console.log(dms(30));           // 30°00'00"
