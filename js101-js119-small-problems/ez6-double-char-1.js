@@ -2,7 +2,7 @@
 
 //Using split(), map(), and join()
 function repeater(string) {
-  return string.split('').map((char) => char + char).join('');
+  return string.split('').map(char => char.repeat(2)).join('');
 }
 
 //Using an empty array and for loop
